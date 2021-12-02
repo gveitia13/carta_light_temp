@@ -191,9 +191,10 @@ def cart_detail(request, username):
     usuario = get_object_or_404(User, username=username)
     if not request.session.get(CART_SESSION_ID):
         request.session[CART_SESSION_ID] = {}
-    zonas = Zona.objects.all()[0]
+
     total = 0
     cfg = Configuracion.objects.all().get(usuario=usuario)
+    zonas = Zona.objects.filter(cfg=cfg)
     categorias = Categoria.objects.all().filter(usuario=cfg.usuario)
     productos = Product.objects.all().filter(visible=True, cfg=cfg).order_by('categoria__orden')
     for value in request.session[CART_SESSION_ID]:
