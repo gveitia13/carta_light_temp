@@ -4,10 +4,14 @@ from datetime import datetime
 from pathlib import Path
 from django.contrib.auth.models import User
 import qrcode
+from django.contrib.sessions.models import Session
 from django.db import models
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
 import shutil
+
+from django.shortcuts import get_object_or_404
+
 from .get_user import current_request
 
 
@@ -103,7 +107,7 @@ class Configuracion(models.Model):
 
 class Product(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
-    cfg = models.ForeignKey(Configuracion, on_delete=models.CASCADE, default=1)
+    cfg = models.ForeignKey(Configuracion, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='productos/', verbose_name='Imagen', help_text='Resolución recomendada 400x300')
     name = models.CharField(max_length=255, verbose_name='Nombre')
     price = models.FloatField(default=0, verbose_name='Precio', help_text='Opcional')
@@ -115,6 +119,17 @@ class Product(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Product, self).__init__(*args, **kwargs)
+        if not self.cfg:
+            session = Session.objects.all()
+            user = ""
+            for item in session:
+                if item.get_decoded().get('_auth_user_id') != None:
+                    user = User.objects.get(pk=item.get_decoded().get('_auth_user_id'))
+            try:
+                cfg = get_object_or_404(Configuracion, usuario=user)
+            except:
+                return
+            self.cfg = cfg
         self.__precio = self.price
 
     def resumen(self):
