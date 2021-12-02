@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block titulo %} Menú {% endblock %}
+{% block estilo-2 %}
+    <style>
+        .header {
+            background: url("/media/{{ cfg.logo }}") no-repeat left;
+            background-size: cover;
+        }
+
+        p.footer-class a {
+            color: {{ cfg.color }};
+        }
+
+        .footer-bottom label::before, .footer-bottom label::after {
+            background-color: {{ cfg.color }};
+        }
+
+        .footer-bottom i {
+            color: {{ cfg.color }};
+        }
+
+        .social-ic li a i {
+            border: 3px double{{ cfg.color }};
+        }
+
+        .social-ic li a i:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/telegram.png' %}) no-repeat -3px -3px;
+        }
+
+        .social-ic li a i {
+            background: url({% static 'cookery/images/telegram.png' %}) no-repeat -3px -3px;
+        }
+
+        .social-ic li a i.ic:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        .social-ic li a i.ic1:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -145px 2px;
+        }
+
+        .social-ic li a i.ic {
+            background: url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        .social-ic li a i.ic2:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/whatsapp.png' %}) no-repeat -3px -2px;
+        }
+
+        .social-ic li a i.ic2 {
+            background: url({% static 'cookery/images/whatsapp.png' %}) no-repeat -3px -2px;
+        }
+
+        .toggle {
+            background-color: {{ cfg.color }};
+        }
+
+        .toggle-menu li a:hover, .toggle-menu li a.active {
+            color: {{ cfg.color2 }};
+            border-bottom: 2px solid{{ cfg.color2 }};
+        }
+
+        ul.in li a:hover {
+            color: {{ cfg.color }};
+        }
+
+        .social-ic li a i.ic3:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        p.smith a {
+            color: {{ cfg.color2 }}
+        }
+
+        p.reply a:hover {
+            color: {{ cfg.color }}
+        }
+
+        p.reply a {
+            color: {{ cfg.color2 }}
+        }
+
+        .leave h3 {
+            color: {{ cfg.color }}
+        }
+
+        .single-grid input[type="submit"]:hover {
+            background: {{ cfg.color }}
+        }
+
+        .single-grid input[type="submit"] {
+            background: {{ cfg.color2 }}
+        }
+
+        #fondo {
+            background-color: {{ cfg.color3 }};
+        }
+
+        .smith2 + p {
+            color: black !important;
+            font-size: 24px;
+        }
+
+        .smith3 + p {
+            color: black !important;
+            font-size: 24px;
+        }
+
+        .media-body p {
+            line-height: 2em;
+            margin-top: 1em;
+            color: black !important;
+            font-size: 24px;
+        }
+    </style>
+{% endblock %}
+{% block header %}
+    <div class="header">
+        <div class="banner">
+            <p class="animated wow fadeInLeft" data-wow-duration="1000ms"
+               data-wow-delay="500ms">Bienvenido</p>
+            <label></label>
+            <h4 style="color: {{ cfg.color }}" class="animated wow fadeInTop" data-wow-duration="1000ms"
+                data-wow-delay="500ms">{{ cfg.nombre }}</h4>
+        </div>
+    </div>
+{% endblock %}
+{% block contenido %}
+    <div class="blog" id="fondo">
+        <div class="container">
+
+            <div class="col-md-2 ">
+            </div>
+        <div class="col-md-8 ">
+                <!--content-->
+                <div class="single">
+
+                    <div class="comment" id="cart">
+
+                        {% load cart_tag %}
+                        {% for item in categorias %}
+                            <hr>
+                            <br>
+                            <h1 style="text-align: center; font-family: 'Segoe UI Black'">{{ item }}</h1>
+                            <br>
+                            <hr>
+                            {% for producto in item.product_set.all %}
+                                {% if producto.visible == True %}
+
+                                    <div class="media wow fadeInLeft animated productos" data-wow-delay=".5s"
+                                         id="item{{ producto.pk }}">
+                                        <div class="code-in">
+                                            <p class="smith"><a><label
+                                                    id="cantidad{{ producto.pk }}">
+                                                {% for key, value in cantidades.items %}
+                                                    {% if key == producto.pk %}
+                                                        {{ value }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </label>x {{ producto.name }}
+                                            </a></p>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="media-left">
+                                            <a>
+                                                <img style="width: 150px; height: 150px"
+                                                     src="/media/{{ producto.image }}"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+
+                                            <p class="smith"><a onclick="add({{ producto.pk }})"
+                                                                style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
+                                                    class="glyphicon glyphicon-plus"> </i></a> <br><br>
+                                                <a onclick="decrement({{ producto.pk }})"
+                                                   style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
+                                                        class="glyphicon glyphicon-minus"> </i><br></a>
+                                                <br>
+
+                                            </p>
+
+                                        </div>
+                                    <a style="margin-right: 24px; font-size: 34px; color: {{ cfg.color2 }}">Total <label
+                                                        id="subtotal{{ producto.pk }}">
+                                                    {% for key, value in cantidades.items %}
+                                                        {% if key == producto.pk %}
+                                                            {{ producto.price|multiply:value }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </label> {{ cfg.moneda }}
+                                                </a>
+                                        <p class="smith2"
+                                           style="font-size: 23px; margin-top: 0; color: black; text-align: justify">
+                                            {{ producto.contenido|safe }}
+                                        </p>
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        <br>
+                        <br>
+                        <hr>
+                        <h1 style="text-align: center">Importe: <label
+                                id="cart_clear"> {{ total }} </label> {{ cfg.moneda }}</h1><br>
+                        <a href="{% url 'cart_clear' %}"><h1 style="text-align: center; color: {{ cfg.color2 }}"><i
+                                class="glyphicon glyphicon-erase"></i> Limpiar {{ cfg.cart_like }}</h1></a>
+                    </div>
+                </div>
+
+            </div>
+        <div class="col-md-2 ">
+        </div>
+        </div>
+    </div>
+{% endblock %}
+{% block extra-scripts %}
+    <script>
+        function f(img) {
+            var foto = document.getElementById('foto')
+            foto.src = "/media/" + img;
+        }
+
+        function popup() {
+            var negocio = "{{ cfg.nombre }}"
+            var msg = "Su pedido ha sido enviado con éxito. Será contactado por ".concat(negocio, " para verificar sus datos")
+            window.alert(msg);
+        }
+
+        $("#cart").load("/cuenta #cart", function () {
+            setInterval(function () {
+
+            }, 3000);
+        })
+
+        function add(id) {
+            $.ajax({
+                url: '/cart/add/' + id + '/',
+                data: id,
+                success: function (response) {
+                    var subtotal = document.getElementById('subtotal'.concat(response['id']));
+                    var cantidad = document.getElementById('cantidad'.concat(response['id']));
+                    var total = document.getElementById('cart_'.concat('clear'));
+                    var total_cart = document.getElementById('total_ajax'.concat(''));
+                    cantidad.innerText = parseInt(cantidad.innerText) + 1;
+                    subtotal.innerText = parseFloat(subtotal.innerText) + parseFloat(response['price']);
+                    total.innerText = parseFloat(total.innerText) + parseFloat(response['price']);
+                    total_cart.innerText = parseFloat(total_cart.innerText) + parseFloat(response['price']);
+                },
+            });
+        }
+
+        function decrement(id) {
+            var cantidad2 = document.getElementById('cantidad'.concat(id));
+            if (parseInt(cantidad2.innerText) === 1) {
+                item_clear(id)
+                var subtotal = document.getElementById('subtotal'.concat(id));
+                var cantidad = document.getElementById('cantidad'.concat(id));
+                var total = document.getElementById('cart_'.concat('clear'));
+                var total_cart = document.getElementById('total_ajax'.concat(''));
+                cantidad.innerText = parseInt(cantidad.innerText) - 1;
+                subtotal.innerText = parseFloat(0);
+                total.innerText = parseFloat(total.innerText) - parseFloat(response['price']);
+                total_cart.innerText = parseFloat(total_cart.innerText) - parseFloat(response['price']);
+            } else {
+                $.ajax({
+                    url: '/cart/decrement/' + id + '/',
+                    data: id,
+                    success: function (response) {
+                        var subtotal = document.getElementById('subtotal'.concat(response['id']));
+                        var cantidad = document.getElementById('cantidad'.concat(response['id']));
+                        var total = document.getElementById('cart_'.concat('clear'));
+                        var total_cart = document.getElementById('total_ajax'.concat(''));
+                        if (parseInt(cantidad.innerText) - 1 > 0) {
+                            cantidad.innerText = parseInt(cantidad.innerText) - 1;
+                            subtotal.innerText = parseFloat(subtotal.innerText) - parseFloat(response['price']);
+                            total.innerText = parseFloat(total.innerText) - parseFloat(response['price']);
+                            total_cart.innerText = parseFloat(total_cart.innerText) - parseFloat(response['price']);
+                        }
+                    },
+                });
+            }
+        }
+
+        function showMessage(s) {
+            var m = $("#message");
+            m.html(s);
+            m.addClass("alerta");
+            m.removeClass("is-removed");
+            m.removeClass("is-hidden");
+            m.addClass("is-visible");
+            setTimeout(function () {
+                m.removeClass("is-visible");
+                m.addClass("is-hidden");
+                setTimeout(function () {
+                    m.addClass("is-removed");
+                }, 2000);
+            }, 3000);
+        }
+
+        function item_clear(id) {
+            $.ajax({
+                url: '/cart/item_clear/' + id + '/',
+                data: id,
+                success: function (response) {
+                    var total = document.getElementById('cart_'.concat('clear'));
+                    var total_cart = document.getElementById('total_ajax'.concat(''));
+                    total.innerText = parseFloat(total.innerText) - (parseFloat(response['price']) * parseFloat(response['quantity']));
+                    total_cart.innerText = parseFloat(total_cart.innerText) - (parseFloat(response['price']) * parseFloat(response['quantity']));
+                },
+            });
+        }
+
+
+    </script>
+{% endblock %}
+

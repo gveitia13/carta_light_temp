@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ cfg.nombre }} - {% block titulo %}{% endblock %}</title>
+    <link href="{% static 'cookery/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <script src="{% static 'cookery/js/jquery.min.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Cookery Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet'
+          type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet'
+          type='text/css'>
+    <script type="text/javascript" src="{% static 'cookery/js/move-top.js' %}"></script>
+    <script type="text/javascript" src="{% static 'cookery/js/easing.js' %}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+    </script>
+    <link href="{% static 'cookery/css/styles.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'cookery/css/component.css' %}"/>
+    <link href="{% static 'cookery/css/animate.min.css' %}" rel="stylesheet">
+    <script src="{% static 'cookery/js/wow.min.js' %}"></script>
+    <script>
+        new WOW().init();
+    </script>
+    {% block estilo-1 %}{% endblock %}
+    <link href="{% static 'cookery/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    {% block estilo-2 %}{% endblock %}
+    <link href="{% static 'cookery/css/custom.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <style>
+        .feedback {
+            background-color: {{ cfg.color2 }};
+            border-color: {{ cfg.color2 }};
+            padding: 15px 20px;
+        }
+
+        .navicon {
+            z-index: 9999;
+        }
+
+        .blockDiv {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: #FFF;
+            width: 0px;
+            height: 0px;
+            z-index: 998;
+        }
+    </style>
+</head>
+<body>
+{% block header %}{% endblock %}
+<a id="button"></a>
+<div id="mybutton">
+    <button {% if cfg.recibir_pedidos == True %}onclick="window.location.replace('/{{ cfg.usuario.username }}/contacto/');"{% endif %} class="feedback"><img
+            class="" {% if cfg.recibir_pedidos == True %}src="{% static 'cookery/images/whatsapp.png' %}"{% else %}style="width: 35px" src="{% static 'cookery/images/no_whatsapp.png' %}"{% endif %}><br>
+        <label id="total_ajax">{{ total }}</label> {{ cfg.moneda }}
+    </button>
+</div>
+<div id="message" class="is-hidden"></div>
+{% block contenido %}{% endblock %}
+<div class="footer">
+    <div class="container">
+        <div class="footer-head">
+            <div class="col-md-8 footer-top animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+                <span style="margin-top: 0;">{{ cfg.direccion }}
+                </span>
+                <span style="margin-top: 0; border-top-color: transparent">
+                    {% for item in cfg.zona_set.all%}
+                        • {{ item.dia }}  {{ item.horario }} <br>
+                    {% endfor %}
+                </span>
+            </div>
+
+            <div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms"
+                 data-wow-delay="500ms">
+                <h2>{{ cfg.tel }}</h2>
+                <label><i class="glyphicon glyphicon-menu-up"></i></label>
+                <p style="font-size: 25px">{% if cfg.tel %}
+                    Teléfono
+                {% endif %}
+                </p>
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+        <p class="footer-class animated wow bounce" data-wow-duration="1000ms" data-wow-delay="500ms">&copy;
+            2021 {{ cfg.nombre }}. Desarrollado por GoDjango </p>
+    </div>
+</div>
+<script>
+    function unblock_screen() {
+        $('#screenBlock').animate({opacity: 0}, 200, function () {
+            $('#screenBlock').remove();
+        });
+    }
+
+    function block_screen() {
+        console.log('')
+        $('<div id="screenBlock"></div>').appendTo('body');
+        $('#screenBlock').css({opacity: 0, width: $(document).width(), height: $(document).height()});
+        $('#screenBlock').addClass('blockDiv');
+        $('#screenBlock').animate({opacity: 0.7}, 200);
+    }
+</script>
+{% block extra-scripts %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block titulo %} {{ producto.name }}{% endblock %}
+{% block estilo-2 %}
+    <style>
+        .header {
+            background: url("/media/{{ carta.imagen }}") no-repeat left;
+            background-size: cover;
+        }
+
+        p.footer-class a {
+            color: {{ cfg.color }};
+        }
+
+        .footer-bottom label::before, .footer-bottom label::after {
+            background-color: {{ cfg.color }};
+        }
+
+        .footer-bottom i {
+            color: {{ cfg.color }};
+        }
+
+        .social-ic li a i {
+            border: 3px double{{ cfg.color }};
+        }
+
+        .social-ic li a i:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/telegram.png' %}) no-repeat -3px -3px;
+        }
+
+        .social-ic li a i {
+            background: url({% static 'cookery/images/telegram.png' %}) no-repeat -3px -3px;
+        }
+
+        .social-ic li a i.ic:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        .social-ic li a i.ic1:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -145px 2px;
+        }
+
+        .social-ic li a i.ic {
+            background: url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        .social-ic li a i.ic2:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/whatsapp.png' %}) no-repeat -3px -2px;
+        }
+
+        .social-ic li a i.ic2 {
+            background: url({% static 'cookery/images/whatsapp.png' %}) no-repeat -3px -2px;
+        }
+
+        .toggle {
+            background-color: {{ cfg.color }};
+        }
+
+        .toggle-menu li a:hover, .toggle-menu li a.active {
+            color: {{ cfg.color2 }};
+            border-bottom: 2px solid{{ cfg.color2 }};
+        }
+
+        ul.in li a:hover {
+            color: {{ cfg.color }};
+        }
+
+        .social-ic li a i.ic3:hover {
+            background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %}) no-repeat -305px 2px;
+        }
+
+        .search-in h4, .grid-categories h4, .blog-bottom h4 {
+            color: {{ cfg.color2 }};
+        }
+
+        .single-top h4 {
+            color: {{ cfg.color2 }};
+        }
+
+        ul.grid-blog li i {
+            color: {{ cfg.color }};
+        }
+
+        .comment h3 {
+            color: {{ cfg.color }};
+        }
+
+        .leave h3 {
+            color: {{ cfg.color }};
+        }
+
+        .single-grid input[type="submit"]:hover {
+            background: {{ cfg.color }};
+        }
+
+        .single-grid input[type="submit"] {
+            background: {{ cfg.color2 }}
+        }
+
+        ul.grid-blog li a:hover {
+            color: {{ cfg.color }}
+        }
+
+        p.smith a {
+            color: {{ cfg.color2 }};
+        }
+
+        p.reply a:hover {
+            color: {{ cfg.color }}
+        }
+
+        p.reply a {
+            color: {{ cfg.color2 }};
+        }
+    </style>
+{% endblock %}
+{% block header %}
+    <div class="header head">
+        <div class="container">
+            <div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
+                <h1><a href="{% url 'index' %}"><img src="/media/{{ cfg.logo }}" alt=""></a></h1>
+            </div>
+            <div class="nav-icon">
+                <a href="#" class="navicon"></a>
+                <div class="toggle">
+                    <ul class="toggle-menu">
+                        <li><a href="{% url 'index' %}">Inicio</a></li>
+                        <li><a class="active" href="{% url 'carta' %}">{{ cfg.carta_like }}</a></li>
+                        <li><a href="{% url 'contacto' %}">Contacto</a></li>
+                        <li><a href="{% url 'cart_detail' %}">{{ cfg.cart_like }}</a></li>
+                    </ul>
+                </div>
+                <script>
+                    $('.navicon').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).toggleClass('navicon--active');
+                        $('.toggle').toggleClass('toggle--active');
+                    });
+                </script>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- start search-->
+
+    </div>
+{% endblock %}
+{% block contenido %}
+    <div class="blog">
+        <div class="container">
+
+            <div class="col-md-9 ">
+                <!--content-->
+                <div class="single">
+
+                    <div class="single-top">
+                        <img class="img-responsive wow fadeInUp animated" data-wow-delay=".5s"
+                             src="/media/{{ producto.image }}" id="foto" alt=""/>
+                        <div class="lone-line">
+                            <h4>{{ producto.name }}</h4>
+                            <ul class="grid-blog">
+                                {% if producto.price or producto.price != 0 %}
+                                    <li><span style="font-size: 25px"><i class="glyphicon glyphicon-usd"> </i>
+							    {{ producto.price }} {{ cfg.moneda }}
+							</span></li>{% endif %}
+                                <li><span style="font-size: 25px;font-weight: bold;cursor: pointer"><i
+                                        class="glyphicon glyphicon-book"> </i>
+							    <a onclick="add({{ producto.id }})"> Pedir</a>
+							</span></li>
+                            </ul>
+                            <p class="wow fadeInLeft animated" data-wow-delay=".5s">
+                                {{ producto.contenido|safe }}
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+
+
+                </div>
+                <!---->
+                <!--//content-->
+
+            </div>
+            <div class="col-md-3 categories-grid">
+                <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+                    {% if producto.productoperks_set.all %}
+                        <h4>Sobre {{ producto.name }}</h4>
+                        <ul class="popular">
+                            {% for perk in producto.productoperks_set.all %}
+                                <li style="font-size: 18px"><a style="cursor: default"><i class="glyphicon glyphicon-star"> </i>{{ perk }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4>No hay información adicional</h4>
+                    {% endif %}
+                </div>
+                <div class="blog-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+                    {% if producto.galeriaproducto_set.all %}
+                        <h4>Más imágenes </h4>
+                        <div class="product-go">
+                            <a onclick="f('{{ producto.image }}')"
+                               style="padding-right: 5px;padding-bottom: 5px;cursor: pointer" class="fashion"><img class="img-responsive " src="/media/{{ producto.image }}" alt=""></a>
+                            {% for foto in producto.galeriaproducto_set.all %}
+                                <a onclick="f('{{ foto.image }}')"
+                                   style="padding-right: 5px;padding-bottom: 5px; cursor: pointer" class="fashion"><img class="img-responsive " src="/media/{{ foto.image }}" alt=""></a>
+                            {% endfor %}
+                        </div>
+                        </div>
+                    {% else %}
+                        <h4>{{ producto.name }} no tiene imagenes adicionales</h4> <br>
+                    {% endif %}
+
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+
+        <div class="leave">
+            <hr>
+            <!-- <h3 style="float: left; text-align: left">Deja tu opinión</h3> -->
+            <form method="post" action="{% url 'producto_detail' producto.id %}">
+
+                {% csrf_token %}
+                <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
+                    <label style="font-size: 20px; color: {{ cfg.color2 }}; font-weight: bolder">Deja tu
+                        comentario</label>
+                    {% render_field form.nombre placeholder="Nombre" style+='color: black' %}
+                    {% render_field form.contenido placeholder="Comentario" style+='color: black' %}
+                    <label class="hvr-rectangle-out">
+                        <input type="submit" value="Comentar"><br><br>
+                    </label>
+                </div>
+            </form>
+            {% if cfg.comentarios %}
+                {% if flag %}
+                    <div class="comment">
+                        <h3>Comentarios</h3>
+                        {% for comentario in comentarios %}
+                            <div class="media wow fadeInLeft animated" data-wow-delay=".5s">
+                                <div class="code-in">
+                                    <p class="smith"><a style="cursor: default">{{ comentario.nombre }}</a>
+                                        <span></span></p>
+                                    <p class="reply"><a style="cursor: default"><i
+                                            class="glyphicon glyphicon-calendar"> </i>{{ comentario.fecha }}</a></p>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="media-body">
+                                    <p>{{ comentario.contenido }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                {% else %}
+                    <h3>Aún no hay comentarios. Sé el primero en comentar!</h3>
+                {% endif %}
+                </div>
+            {% endif %}
+
+    </div>
+{% endblock %}
+{% block extra-scripts %}
+    <script>
+        function f(img) {
+            var foto = document.getElementById('foto')
+            foto.src = "/media/" + img;
+        }
+
+        function showMessage(s) {
+            var m = $("#message");
+            m.html(s);
+            m.addClass("notificacion");
+            m.removeClass("is-removed");
+            m.removeClass("is-hidden");
+            m.addClass("is-visible");
+            setTimeout(function () {
+                m.removeClass("is-visible");
+                m.addClass("is-hidden");
+                setTimeout(function () {
+                    m.addClass("is-removed");
+                }, 2000);
+            }, 3000);
+        }
+
+        function add(id) {
+            block_screen()
+            $.ajax({
+                url: '/cart/add/' + id + '/',
+                data: id,
+                success: function (response) {
+                    setTimeout(function () {
+                        unblock_screen()
+                    }, 1000);
+                    showMessage("Se agregó ".concat(response['name']).concat(" a {{ cfg.cart_like }}"));
+                    var total_cart = document.getElementById('total_ajax'.concat(''));
+                    total_cart.innerText = parseFloat(total_cart.innerText) + parseFloat(response['price']);
+                },
+            });
+        }
+    </script>
+{% endblock %}
+

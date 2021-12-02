@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ cfg.nombre }} - Inicio</title>
+<link href="{% static 'cookery/css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'cookery/js/jquery.min.js' %}"></script>
+<!-- Custom Theme files -->
+<!--theme-style-->
+
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Cookery Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!---->
+<link href='//fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+<!-- start-smoth-scrolling -->
+		<script type="text/javascript" src="{% static 'cookery/js/move-top.js' %}"></script>
+		<script type="text/javascript" src="{% static 'cookery/js/easing.js' %}"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+	<!-- start-smoth-scrolling -->
+<link href="{% static 'cookery/css/styles.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'cookery/css/component.css' %}" />
+	<!-- animation-effect -->
+<link href="{% static 'cookery/css/animate.min.css' %}" rel="stylesheet">
+<script src="{% static 'cookery/js/wow.min.js' %}"></script>
+<script>
+ new WOW().init();
+</script>
+    <style>
+        .pedir{
+            display: none;
+        }
+        .btm-right:hover .captn .pedir {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+
+    <link href="{% static 'cookery/css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <style>
+        .especiales{
+            margin-bottom: 20px;
+        }
+        p.footer-class a{
+        color: {{ cfg.color }};
+    }
+    .footer-bottom label::before, .footer-bottom label::after {
+        background-color: {{ cfg.color }};
+    }
+    .footer-bottom i{
+        color: {{ cfg.color }};
+    }
+    .social-ic li a i{
+        border: 3px double {{ cfg.color }};
+    }
+    .social-ic li a i:hover {
+	    background: {{ cfg.color }} url({% static 'cookery/images/telegram.png' %})no-repeat -3px -3px;
+    }
+    .social-ic li a i{
+	    background: url({% static 'cookery/images/telegram.png' %})no-repeat -3px -3px;
+    }
+    .social-ic li a i.ic:hover {
+	    background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %})no-repeat -305px 2px;
+    }
+    .social-ic li a i.ic1:hover {
+	    background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %})no-repeat -145px 2px;
+    }
+    .social-ic li a i.ic {
+	    background: url({% static 'cookery/images/img-sprite.png' %})no-repeat -305px 2px;
+    }
+    .social-ic li a i.ic2:hover {
+	    background: {{ cfg.color }} url({% static 'cookery/images/whatsapp.png' %})no-repeat -3px -2px;
+    }
+    .social-ic li a i.ic2 {
+	    background: url({% static 'cookery/images/whatsapp.png' %})no-repeat -3px -2px;
+    }
+    .toggle {
+    	background-color: {{ cfg.color }};
+    }
+    .toggle-menu li a:hover, .toggle-menu li a.active {
+    	color: {{ cfg.color2 }};
+	    border-bottom: 2px solid {{ cfg.color2 }};
+    }
+    .banner h4 {
+	    color: {{ cfg.color }};
+    }
+    .content-left h3 {
+	    color: {{ cfg.color2 }};
+    }
+    .hover-fold {
+	    background: {{ cfg.color2 }};
+    }
+    .hover-fold .back {
+    	background: {{ cfg.color2 }};
+    }
+    .services {
+    	background: {{ cfg.color }};
+    }
+    .services-left h3 {
+	    color: {{ cfg.color2 }};
+    }
+    .ser-top h5 {
+    	color: {{ cfg.color2 }};
+    }
+    ul.in li a:hover {
+	    color: {{ cfg.color }};
+    }
+    .social-ic li a i.ic3:hover {
+	    background: {{ cfg.color }} url({% static 'cookery/images/img-sprite.png' %})no-repeat -305px 2px;
+    }
+    .contact-para input[type="submit"] {
+    	font-size: 0.7em;
+    }
+        .btm-right .captn{
+        background-color: {{ cfg.color }};
+    }
+    .captn::before{
+        border-bottom-color: {{ cfg.color }};
+    }
+    </style>
+<!-- //animation-effect -->
+
+</head>
+</head>
+<body>
+ <div class="header">
+	<div class="container">
+		<div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
+			<h1><a href="{% url 'index' %}"><img src="/media/{{ cfg.logo }}" alt=""></a></h1>
+		</div>
+		<div class="nav-icon">		
+			<a href="#" class="navicon"></a>
+				<div class="toggle">
+					<ul class="toggle-menu">
+						<li><a class="active" href="{% url 'index' %}">Inicio</a></li>
+						<li><a  href="{% url 'carta' %}">La Carta</a></li>
+						<li><a  href="{% url 'contacto' %}">Contacto</a></li>
+                        <li><a  href="{% url 'cart_detail' %}">La Cuenta</a></li>
+					</ul>
+				</div>
+			<script>
+			$('.navicon').on('click', function (e) {
+			  e.preventDefault();
+			  $(this).toggleClass('navicon--active');
+			  $('.toggle').toggleClass('toggle--active');
+			});
+			</script>
+		</div>
+	<div class="clearfix"></div>
+	</div>
+	<!-- start search-->	
+		<div class="banner">
+			<p class="animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">{{ principal.texto_sup }}</p>
+			<label></label>
+			<h4 class="animated wow fadeInTop" data-wow-duration="1000ms" data-wow-delay="500ms">{{ principal.titulo }}</h4>
+			<a class="scroll down" href="#content-down"><img src="{% static 'cookery/images/down.png' %}" alt=""></a>
+		</div>
+</div>
+<!--content-->
+<div class="content" id="content-down">
+	<div class="content-top-top">
+		<div class="container">
+			<div class="content-top">
+				<div class="col-md-4 content-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<h3>{{ menu.titulo }}</h3>
+					<span>{% if nosotros.subtitulo %}
+                        <label><i class="glyphicon glyphicon-menu-up"></i></label>
+					{{ menu.subtitulo }}
+					{% endif %}
+                    <div class="col-md-7 contact-para animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+                        <form method="get" action="{% url 'carta' %}">
+                            <div class="send">
+                                <input type="submit" value="Ver la carta" ><br>
+                            </div>
+                        </form>
+                    </div>
+
+                    </span>
+				</div>
+				<div class="col-md-8 content-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+					{{ menu.contenido|safe }}
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="content-mid">
+					<div class="col-md-4 content-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<h3>Ofertas especiales<br><br></h3>
+				</div>
+				{% for especial in especiales %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        <div class="clearfix"></div>
+                        </div>
+                        <div class="menu-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+                    {% endif %}
+
+				    <div class="col-md-4 menu-bottom1">
+					<div class="btm-right">
+						<a href="{% url 'producto_detail' especial.id %}">
+							<img src="/media/{{ especial.image }}" style="height: 300px; width: 400px" alt="" class="img-responsive">
+							<div class="captn">
+								<h4 style="color: white">{% if especial.especial %}
+                                        <label><i class="glyphicon glyphicon-star"></i></label>
+                                    {% endif %}{{ especial.name }} <br> <a class="pedir" style="padding-top: 5px; padding-bottom: 5px" href="{% url 'cart_add' especial.id %}"><i class="glyphicon glyphicon-book"></i> Pedir</a>
+                                </h4>
+								<p class="pedir">
+                                    {% if especial.price %}
+                                        {{ especial.price }} CUP
+                                    {% endif %}
+                                </p>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				{% endfor %}
+				
+				
+
+			</div>
+		</div>
+	</div>
+<!--services-->
+<div class="services">
+	<div class="container">
+		<div class="services-top">		
+			<div class="col-md-8 services-right animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<p>{{ nosotros.contenido|safe }}</p>
+			</div>
+			<div class="col-md-4 services-left animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+				<h3>{{ nosotros.titulo }}</h3>
+                {% if nosotros.subtitulo %}
+                    <label><i class="glyphicon glyphicon-menu-up"></i></label>
+				    <span>{{ nosotros.subtitulo }}</span>
+                {% endif %}
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="service-top">
+			<div class="col-md-12 service-bottom animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+				{% for perk in nosotros.seccionnosotrosperks_set.all %}
+				    <div class=" service-bottom1">
+					<div class=" ser-bottom">
+						<img src="/media/{{ perk.imagen }}" class="img-responsive" style="width: 150px; height: 150px" alt="">
+					</div>
+					<div class="ser-top " style="margin-top: 30px">
+						<h5>{{ perk.titulo }}</h5>
+						{{ perk.contenido|safe }}
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				{% endfor %}
+
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<!--//services-->
+</div>
+<!--footer-->
+	<div class="footer">
+		<div class="container">
+			<div class="footer-head">
+				<div class="col-md-8 footer-top animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<ul class=" in">
+						<li><a href="index.html">Inicio</a></li>
+						<li><a  href="{% url 'carta' %}">La Carta</a></li>
+						<li><a  href="{% url 'contacto' %}">Contacto</a></li>
+                        <li><a  href="{% url 'cart_detail' %}">La Cuenta</a></li>
+					</ul>
+                    <span style="text-align: center">{{ cfg.nombre }}</span>
+                </div>
+                <div class="col-md-4 footer-bottom  animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+					<h2>{{ cfg.titulo_texto_redes }}</h2>
+					<label><i class="glyphicon glyphicon-menu-up"></i></label>
+					<p>{{ cfg.texto_redes|safe }}</p>
+					<ul class="social-ic">
+						<li><a href="#"><i></i></a></li>
+						<li><a href="#"><i class="ic"></i></a></li>
+						<li><a href="#"><i class="ic1"></i></a></li>
+						<li><a href="#"><i class="ic2"></i></a></li>
+					</ul>
+
+				</div>
+			<div class="clearfix"> </div>
+					
+			</div>
+			<p class="footer-class animated wow bounce" data-wow-duration="1000ms" data-wow-delay="500ms">&copy; 2021 {{ cfg.nombre }}. Desarrollado por GoDjango | Diseñado por <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+		</div>
+	</div>		
+	<!--//footer-->
+</body>
+</html>
