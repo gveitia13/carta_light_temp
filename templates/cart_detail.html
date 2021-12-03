@@ -133,7 +133,7 @@
 
             <div class="col-md-2 ">
             </div>
-        <div class="col-md-8 ">
+            <div class="col-md-8 ">
                 <!--content-->
                 <div class="single">
 
@@ -143,47 +143,51 @@
                         {% for item in categorias %}
                             <hr>
                             <br>
-                            <h1 style="text-align: center; font-family: 'Segoe UI Black'">{{ item }}</h1>
+                            <h1 id="trigger{{ item.pk }}"
+                                style="text-align: center; font-family: 'Segoe UI Black'; cursor:pointer;"><span id="boton{{ item.pk }}" style="font-weight: bolder; font-size: 30px">{% if forloop.first %}▲ {% else %}▼ {% endif %}</span> {{ item }}</h1>
                             <br>
                             <hr>
-                            {% for producto in item.product_set.all %}
-                                {% if producto.visible == True %}
+                            <div id="bloque{{ item.pk }}"
+                                 {% if forloop.first %}{% else %}style="display: none" {% endif %}>
+                                {% for producto in item.product_set.all %}
+                                    {% if producto.visible == True %}
 
-                                    <div class="media wow fadeInLeft animated productos" data-wow-delay=".5s"
-                                         id="item{{ producto.pk }}">
-                                        <div class="code-in">
-                                            <p class="smith"><a><label
-                                                    id="cantidad{{ producto.pk }}">
-                                                {% for key, value in cantidades.items %}
-                                                    {% if key == producto.pk %}
-                                                        {{ value }}
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </label>x {{ producto.name }}
-                                            </a></p>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                        <div class="media-left">
-                                            <a>
-                                                <img style="width: 150px; height: 150px"
-                                                     src="/media/{{ producto.image }}"
-                                                     alt="">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
+                                        <div class="media wow fadeInLeft animated productos" data-wow-delay=".5s"
+                                             id="item{{ producto.pk }}">
+                                            <div class="code-in">
+                                                <p class="smith"><a><label
+                                                        id="cantidad{{ producto.pk }}">
+                                                    {% for key, value in cantidades.items %}
+                                                        {% if key == producto.pk %}
+                                                            {{ value }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </label>x {{ producto.name }}
+                                                </a></p>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="media-left">
+                                                <a>
+                                                    <img style="width: 150px; height: 150px"
+                                                         src="/media/{{ producto.image }}"
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
 
-                                            <p class="smith"><a onclick="add({{ producto.pk }})"
-                                                                style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
-                                                    class="glyphicon glyphicon-plus"> </i></a> <br><br>
-                                                <a onclick="decrement({{ producto.pk }})"
-                                                   style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
-                                                        class="glyphicon glyphicon-minus"> </i><br></a>
-                                                <br>
+                                                <p class="smith"><a onclick="add({{ producto.pk }})"
+                                                                    style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
+                                                        class="glyphicon glyphicon-plus"> </i></a> <br><br>
+                                                    <a onclick="decrement({{ producto.pk }})"
+                                                       style="font-size: 25px; padding-right: 10px; cursor: pointer"><i
+                                                            class="glyphicon glyphicon-minus"> </i><br></a>
+                                                    <br>
 
-                                            </p>
+                                                </p>
 
-                                        </div>
-                                    <a style="margin-right: 24px; font-size: 34px; color: {{ cfg.color2 }}">Total <label
+                                            </div>
+                                            <a style="margin-right: 24px; font-size: 34px; color: {{ cfg.color2 }}">Total
+                                                <label
                                                         id="subtotal{{ producto.pk }}">
                                                     {% for key, value in cantidades.items %}
                                                         {% if key == producto.pk %}
@@ -191,15 +195,16 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                 </label> {{ cfg.moneda }}
-                                                </a>
-                                        <p class="smith2"
-                                           style="font-size: 23px; margin-top: 0; color: black; text-align: justify">
-                                            {{ producto.contenido|safe }}
-                                        </p>
+                                            </a>
+                                            <p class="smith2"
+                                               style="font-size: 23px; margin-top: 0; color: black; text-align: justify">
+                                                {{ producto.contenido|safe }}
+                                            </p>
 
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         {% endfor %}
                         <br>
                         <br>
@@ -212,8 +217,8 @@
                 </div>
 
             </div>
-        <div class="col-md-2 ">
-        </div>
+            <div class="col-md-2 ">
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -314,7 +319,16 @@
             });
         }
 
-
+        {% for item in categorias %}
+            $("#trigger{{ item.pk }}").click(function (){
+                $("#bloque{{ item.pk }}").toggle('fast')
+                if ($("#boton{{ item.pk }}").html() === "▲ " ){
+                    $("#boton{{ item.pk }}").html("▼ ")
+                }else{
+                    $("#boton{{ item.pk }}").html("▲ ")
+                }
+            })
+        {% endfor %}
     </script>
 {% endblock %}
 

@@ -191,7 +191,6 @@ def cart_detail(request, username):
     usuario = get_object_or_404(User, username=username)
     if not request.session.get(CART_SESSION_ID):
         request.session[CART_SESSION_ID] = {}
-
     total = 0
     cfg = Configuracion.objects.all().get(usuario=usuario)
     zonas = Zona.objects.filter(cfg=cfg)
@@ -229,7 +228,7 @@ def enrutar(request, username):
         precio = request.session[CART_SESSION_ID][value]['quantity'] * float(
             request.session[CART_SESSION_ID][value]['price'])
         mensaje = mensaje + '• ' + str(request.session[CART_SESSION_ID][value]['quantity']) + 'x ' + \
-                  request.session[CART_SESSION_ID][value]['name'] + ': $' + str(precio) + mark_safe(' <br/> ')
+                  request.session[CART_SESSION_ID][value]['name'] + ': $' + str(precio) + '\n'
     mensaje = mensaje + 'Total: ' + str(total)
     return redirect('https://api.whatsapp.com/send?phone='+str(cfg.whatsapp)+'&text='+mensaje)
 
