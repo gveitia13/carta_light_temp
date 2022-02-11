@@ -211,7 +211,7 @@
                         <hr>
                         <h1 style="text-align: center">Importe: <label
                                 id="cart_clear"> {{ total }} </label> {{ cfg.moneda }}</h1><br>
-                        <a href="{% url 'cart_clear' %}"><h1 style="text-align: center; color: {{ cfg.color2 }}"><i
+                        <a href="{% url 'cart_clear' cfg.usuario.username %}"><h1 style="text-align: center; color: {{ cfg.color2 }}"><i
                                 class="glyphicon glyphicon-erase"></i> Limpiar {{ cfg.cart_like }}</h1></a>
                     </div>
                 </div>
@@ -235,11 +235,12 @@
             window.alert(msg);
         }
 
+		/*
         $("#cart").load("/cuenta #cart", function () {
             setInterval(function () {
 
             }, 3000);
-        })
+        })*/
 
         function add(id) {
             $.ajax({

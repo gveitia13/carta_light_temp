@@ -177,10 +177,10 @@ def cart_decrement_ajax(request, id):
     return JsonResponse({'name':product.name, 'id':product.id, 'price':product.price}, safe=False)
 
 
-def cart_clear(request):
+def cart_clear(request, username):
     cart = Cart(request)
     cart.clear()
-    return redirect("cart_detail")
+    return redirect("index", username=username)
 
 def cart_clear_ajax(request):
     cart = Cart(request)
