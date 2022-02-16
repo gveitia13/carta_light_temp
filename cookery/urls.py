@@ -15,6 +15,7 @@ urlpatterns = [
     path('cart/item_increment/<int:id>/', item_increment, name='item_increment'),
     # path('cart/item_decrement/<int:id>/', item_decrement, name='item_decrement'),
     path('cart/decrement/<int:id>/', cart_decrement_ajax, name='item_decrement'),
+    path('cart/cart_clear_ajax/',cart_clear_ajax, name='cart_clear_ajax'),
     path('cart/cart_clear/<username>', cart_clear, name='cart_clear'),
     #path('cuenta/', cart_detail, name='cart_detail'),
 

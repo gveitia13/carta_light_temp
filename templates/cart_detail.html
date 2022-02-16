@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
 {% block titulo %} Menú {% endblock %}
@@ -118,6 +118,7 @@
 {% endblock %}
 {% block header %}
     <div class="header">
+        
         <div class="banner">
             <p class="animated wow fadeInLeft" data-wow-duration="1000ms"
                data-wow-delay="500ms">Bienvenido</p>
@@ -235,13 +236,34 @@
             window.alert(msg);
         }
 
-		/*
-        $("#cart").load("/cuenta #cart", function () {
-            setInterval(function () {
+        $(window).on('load', function () {
+                
+            $.ajax({
+                url: '/cart/cart_clear_ajax/',
+                success: function (response) {
+                    $('*[id*=cantidad]').each(function(){
+                        var subtot = document.getElementById (this.id);
+                        if (subtot.nodeName == 'LABEL') {
+                            (this).innerText = parseInt(0);
+                        }
+                    });
 
-            }, 3000);
-        })*/
+                    $('*[id*=subtotal]').each(function(){
+                        var cant = document.getElementById(this.id);
+                        if (cant.nodeName == 'LABEL') {
+                            (this).innerText=parseFloat(0.0);
+                        }
+                    });
 
+                    var total = document.getElementById('cart_'.concat('clear'));
+                    total.innerText = parseFloat(0.0);
+
+                    var total_cart = document.getElementById('total_ajax'.concat(''));
+                    total_cart.innerText = parseFloat(0.0);
+                },
+            })
+        })
+         
         function add(id) {
             $.ajax({
                 url: '/cart/add/' + id + '/',
