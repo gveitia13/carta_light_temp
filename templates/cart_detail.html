@@ -167,12 +167,13 @@
                                                 </a></p>
                                                 <div class="clearfix"></div>
                                             </div>
-                                            <div class="media-left">
+                                            <div class="media-left" style="text-align: center;">
                                                 <a>
                                                     <img style="width: 150px; height: 150px"
                                                          src="/media/{{ producto.image }}"
                                                          alt="">
                                                 </a>
+                                                <p class="smith" style="font-size: 15px; color: {{ cfg.color3 }}"><a>{{producto.price}} {{cfg.moneda}}</a></p>
                                             </div>
                                             <div class="media-body">
 
@@ -187,6 +188,9 @@
                                                 </p>
 
                                             </div>
+                                            
+                                                
+                                            
                                             <a style="margin-right: 24px; font-size: 34px; color: {{ cfg.color2 }}">Total
                                                 <label
                                                         id="subtotal{{ producto.pk }}">
@@ -197,10 +201,7 @@
                                                     {% endfor %}
                                                 </label> {{ cfg.moneda }}
                                             </a>
-                                            <p class="smith2"
-                                               style="font-size: 23px; margin-top: 0; color: black; text-align: justify">
-                                                {{ producto.contenido|safe }}
-                                            </p>
+                                            
 
                                         </div>
                                     {% endif %}
