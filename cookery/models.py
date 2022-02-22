@@ -57,7 +57,7 @@ class Categoria(models.Model):
         ordering = ('orden',)
 
 class Configuracion(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=2)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=User.objects.first().pk)
     nombre = models.CharField(max_length=255, verbose_name='Nombre del negocio')
     logo = models.ImageField(upload_to='cfg/', verbose_name='Imagen principal')
     moneda = models.CharField(max_length=255, verbose_name='Moneda a usar en la plataforma', default='U.S.D')
