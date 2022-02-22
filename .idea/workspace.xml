@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e1f0039-cba6-4576-a6bb-541815daea76" name="Default Changelist" comment="" />
+    <list default="true" id="5e1f0039-cba6-4576-a6bb-541815daea76" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gilbe_requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/cfg/login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/cfg/login_RbjP4vr.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/carta.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/carta.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2432c02b-317b-4c3e-bc00-7cf49317b002.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2432c02b-317b-4c3e-bc00-7cf49317b002.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carta/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/carta/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cookery/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/cookery/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cookery/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cookery/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/qr/None.png" beforeDir="false" afterPath="$PROJECT_DIR$/media/qr/None.png" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,6 +136,9 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectConfigurationFiles">
     <option name="files">
       <list>
@@ -133,7 +152,9 @@
     <option name="height" value="745" />
   </component>
   <component name="ProjectId" id="21MgbisObjygywxaRcbpcB8aYxL" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -173,13 +194,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="ToolWindowCommit.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../conocell web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -187,11 +210,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Projects\carta_light" />
       <recent name="E:\Desarrollo\Sitios Web\menu\carta\media\productos" />
       <recent name="E:\Desarrollo\Sitios Web\cartafff\carta\templates" />
       <recent name="D:\Desarrollo\software generico\terminados\carta\cookery\static\cookery\css" />
       <recent name="D:\Desarrollo\software generico\terminados\carta\cookery\static\cookery\js" />
-      <recent name="D:\Desarrollo\software generico\terminados\carta\templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -203,9 +226,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="carta.settings" />
       </envs>
-      <option name="SDK_HOME" value="C:\Python\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -300,6 +323,7 @@
       <workItem from="1638304565453" duration="9869000" />
       <workItem from="1638403074735" duration="10560000" />
       <workItem from="1638457767732" duration="408000" />
+      <workItem from="1645507830600" duration="5715000" />
     </task>
     <servers />
   </component>
@@ -369,6 +393,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/cookery/cart detail" />

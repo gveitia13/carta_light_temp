@@ -2,6 +2,8 @@ import hashlib
 import os
 from datetime import datetime
 from pathlib import Path
+
+from crum import get_current_user
 from django.contrib.auth.models import User
 import qrcode
 from django.contrib.sessions.models import Session
@@ -14,8 +16,7 @@ from django.shortcuts import get_object_or_404
 
 from .get_user import current_request
 
-
-#defs
+# defs
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from docutils.utils.math.latex2mathml import mo
@@ -24,12 +25,14 @@ from docutils.utils.math.latex2mathml import mo
 def hash_string(string):
     return hashlib.sha256(string.encode('utf-8')).hexdigest()
 
+
 def walk_up_folder(path, depth=1):
     _cur_depth = 1
     while _cur_depth < depth:
         path = os.path.dirname(path)
         _cur_depth += 1
     return path
+
 
 # Create your models here.
 class ConfiguracionGodlango(models.Model):
@@ -42,6 +45,7 @@ class ConfiguracionGodlango(models.Model):
         verbose_name_plural = '*  Configuraciones de ámbito global'
         verbose_name = 'Configuración de ámbito global'
         app_label = 'godjango'
+
 
 class Categoria(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
@@ -56,34 +60,38 @@ class Categoria(models.Model):
         verbose_name = 'Categoria'
         ordering = ('orden',)
 
+
 class Configuracion(models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=User.objects.first().pk)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255, verbose_name='Nombre del negocio')
     logo = models.ImageField(upload_to='cfg/', verbose_name='Imagen principal')
     moneda = models.CharField(max_length=255, verbose_name='Moneda a usar en la plataforma', default='U.S.D')
     color = ColorField(default='#97824B', verbose_name='Color principal')
     color2 = ColorField(default='#005238', verbose_name='Color secundario')
     color3 = ColorField(default='#005238', verbose_name='Color de fondo')
-    tel = models.CharField(max_length=255, verbose_name='Telefono fijo del establecimiento', help_text='Opcional', blank=True)
+    tel = models.CharField(max_length=255, verbose_name='Telefono fijo del establecimiento', help_text='Opcional',
+                           blank=True)
     direccion = models.CharField(max_length=255, verbose_name='Dirección particular', help_text='Opcional', blank=True)
     whatsapp = models.CharField(max_length=255, verbose_name='Contacto de WhatsApp', help_text='Opcional', blank=True)
     recibir_pedidos = models.BooleanField(default=True)
     qr_img = models.CharField(max_length=900)
 
-
     def image_tag(self):
         return mark_safe('<img src="/media/%s" width="300" height="300" />' % (str(self.qr_img)))
+
     image_tag.short_description = 'Vista previa'
 
     def show_url(self):
-        return mark_safe("<a href='/media/%s'>%s</a>" % (self.qr_img, str(ConfiguracionGodlango.objects.all()[0].url) + str(self.usuario.username)))
+        return mark_safe("<a href='/media/%s'>%s</a>" % (
+        self.qr_img, str(ConfiguracionGodlango.objects.all()[0].url) + str(self.usuario.username)))
+
     show_url.short_description = 'Url'
 
     def __str__(self):
         return self.nombre
 
     def save(self, *args, **kwargs):
-        if not self.qr_img :
+        if not self.qr_img:
             user = self.usuario
             qr = qrcode.make()
             qr = qrcode.QRCode(
@@ -92,7 +100,7 @@ class Configuracion(models.Model):
                 box_size=50,
                 border=4,
             )
-            qr.add_data(str(ConfiguracionGodlango.objects.all()[0].url +  str(user.username)))
+            qr.add_data(str(ConfiguracionGodlango.objects.all()[0].url + str(user.username)))
             qr.make(fit=True)
             img = qr.make_image(fill_color="black", back_color="white").convert('RGB')
             self.qr_img = "/qr/" + str(self.pk) + '.png'
@@ -104,6 +112,7 @@ class Configuracion(models.Model):
     class Meta:
         verbose_name_plural = '01 - Configuraciones'
         verbose_name = 'Configuración'
+
 
 class Product(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
@@ -120,11 +129,11 @@ class Product(models.Model):
     def __init__(self, *args, **kwargs):
         super(Product, self).__init__(*args, **kwargs)
         if not self.cfg:
-            session = Session.objects.all()
-            user = ""
-            for item in session:
-                if item.get_decoded().get('_auth_user_id') != None:
-                    user = User.objects.get(pk=item.get_decoded().get('_auth_user_id'))
+            # session = Session.objects.all()
+            user = get_current_user()
+            # for item in session:
+            #     if item.get_decoded().get('_auth_user_id') != None:
+            #         user = User.objects.get(pk=item.get_decoded().get('_auth_user_id'))
             try:
                 cfg = get_object_or_404(Configuracion, usuario=user)
             except:
@@ -145,6 +154,7 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = 'Productos'
         verbose_name = 'Producto'
+
 
 class Zona(models.Model):
     cfg = models.ForeignKey(Configuracion, on_delete=models.CASCADE)

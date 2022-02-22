@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = '6a^0v)1&7a^e@%*rc5q9fc$ye@(uy+a#m(f-pmvc@zo!!j*4x%'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -45,7 +43,6 @@ INSTALLED_APPS = [
     'cookery.apps.CookeryConfig',
     'godjango.apps.GodjangoConfig',
 
-
 ]
 
 MIDDLEWARE = [
@@ -56,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # crum para obtener current request and user
+    'crum.CurrentRequestUserMiddleware'
 ]
 
 ROOT_URLCONF = 'carta.urls'
@@ -81,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'carta.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -91,7 +89,6 @@ DATABASES = {
         'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -111,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -125,42 +121,41 @@ USE_L10N = False
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-#static
+# static
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-#media
-#DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
+# media
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 10000000000
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-#ck editor
+# ck editor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-#email
+# email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'godjango.automail@gmail.com'
-EMAIL_HOST_PASSWORD = 'rootzenBL' #past the key or password app here
+EMAIL_HOST_PASSWORD = 'rootzenBL'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-#DEFAULT_FROM_EMAIL = 'default from email'
+# DEFAULT_FROM_EMAIL = 'default from email'
 
-#carrito de compras
+# carrito de compras
 CART_SESSION_ID = 'cart'
 CARRITO_SESSION_ID = 'carrito'
 
-#paypal
+# paypal
 PAYPAL_RECEIVER_EMAIL = 'sb-djdwp2514837@business.example.com'
 PAYPAL_TEST = True
 
-#Django 3.2
+# Django 3.2
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-#gaoloc
+# gaoloc
 GEOLOC_DATABASE = '/var/www/geoloc/geoloc.sqlite3'
